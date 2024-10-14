@@ -1,0 +1,6 @@
+# Ignore everything except the Go code and dependencies
+.git
+node_modules
+tmp
+vendor
+

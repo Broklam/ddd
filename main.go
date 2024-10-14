@@ -22,7 +22,7 @@ type User struct {
 
 var db *sql.DB
 var users = make(map[int64]*User)
-var botToken = "ff"
+var botToken = "8033740611:AAGAKJW42f6hzBm9EM63wGyNRWt0brzEEPE"
 
 func main() {
 	var err error
@@ -153,13 +153,18 @@ func growStick(user *User) string {
 	}
 
 	rand.Seed(time.Now().UnixNano())
-	change := rand.Intn(21) - 10 // Random value between -10 and +10
+	change := rand.Intn(21) - 10 // random value between -10 and +10
 	user.Stick += change
+
+	// not negative
+	if user.Stick < 0 {
+		user.Stick = 0
+	}
+
 	user.LastGrow = now
 
 	return fmt.Sprintf("%s's член изменился на %d cм! Текущая длина: %d см", user.Name, change, user.Stick)
 }
-
 func showLeaderboard() string {
 	board := "Leaderboard:\n"
 	type score struct {
