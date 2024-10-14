@@ -22,7 +22,7 @@ type User struct {
 
 var db *sql.DB
 var users = make(map[int64]*User)
-var botToken = "8033740611:AAGAKJW42f6hzBm9EM63wGyNRWt0brzEEPE"
+var botToken = "ff"
 
 func main() {
 	var err error
