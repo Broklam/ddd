@@ -18,6 +18,8 @@ RUN apk --no-cache add sqlite-libs
 
 WORKDIR /root/
 
+COPY --from=builder /app/.env .
+
 COPY --from=builder /app/main .
 
 CMD ["./main"]
