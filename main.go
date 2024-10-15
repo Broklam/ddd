@@ -5,9 +5,12 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
+	"os"
 	"sort"
 	"strings"
 	"time"
+
+	"github.com/joho/godotenv"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	_ "github.com/mattn/go-sqlite3"
@@ -26,6 +29,16 @@ var users = make(map[int64]map[int64]*User) // chatID -> map of userID -> User
 var botToken = "ff"
 
 func main() {
+	er := godotenv.Load()
+	if er != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	botToken := os.Getenv("BOT_TOKEN")
+	if botToken == "" {
+		log.Fatal("BOT_TOKEN not set in .env file")
+	}
+
 	var err error
 	db, err = sql.Open("sqlite3", "./dicks.db")
 	if err != nil {
